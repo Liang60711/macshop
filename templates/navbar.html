@@ -1,0 +1,79 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+    <a class="navbar-brand" href="/">Mac-shop</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse">
+      
+      <!-- left -->
+      <ul class="navbar-nav">
+      <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'core:sell' %}">我要賣</a>
+      </li>
+      
+      
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_1" role="button" data-toggle="dropdown">
+          我要買
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Macbook</a>
+            <a class="dropdown-item" href="#">Mac</a>
+            <a class="dropdown-item" href="#">Iphone</a>
+            <a class="dropdown-item" href="#">Ipad</a>
+            <a class="dropdown-item" href="#">AirPods</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">其他周邊</a>
+          </div>
+      </li>
+      </ul>
+
+      <!-- right -->
+      <form class="navbar-form navbar-center form-inline">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+
+      <ul class="navbar-nav ml-auto">
+
+      {% if not request.user.is_authenticated %}
+
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_login' %}">登入</a>
+      </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_signup' %}">建立帳號</a>
+      </li>
+    </li>
+
+    
+      {% else %}
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            個人資訊: {{ request.user }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+
+            <a class="dropdown-item" href="#">我的關注商品</a>
+            <a class="dropdown-item" href="#">歷史交易紀錄</a>
+            <a class="dropdown-item" href="#">個人檔案</a>
+            <a class="dropdown-item" href="#">修改上架物品</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'account_logout' %}">登出</a>
+          </div>
+        </li>
+      {% endif %}
+
+      </ul>
+         
+    </div>
+    </div>
+</nav>
+
